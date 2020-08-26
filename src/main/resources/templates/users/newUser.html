@@ -4,6 +4,26 @@
 <head th:replace="layout :: head_flagment('new',~{::link})">
 </head>
 <body>
-    <p>新規登録ページ</p>
+	<form th:action="@{/users/create}" th:object="${users}" method="post" enctype="multipart/form-data">
+		<label for="login_id">ログインＩＤ</label>
+		<input type="text" th:field="*{login_id}"> 
+		
+		<label for="password">パスワード</label>
+		<input type="text" th:field="*{password}"> 
+		
+		<label for="name">表示名</label>
+		<input type="text" th:field="*{name}">
+		
+		<!-- a.あとでけす -->
+		<label for="admin_flag">権限</label>  
+		<select name="admin_flag" th:field="*{admin_flag}">
+			<option value="0">一般</option>
+			<option value="1">管理者</option>
+		</select>
+		
+		<input type="hidden" name="_token" value="${_token}" />
+		<input type="hidden" th:field="*{delete_flag}" value="0" />
+		<button type="submit">投稿</button>
+	</form>
 </body>
 </html>
