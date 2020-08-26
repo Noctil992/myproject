@@ -1,4 +1,4 @@
-package url.models;
+package com.example.demo.models;
 
 import java.util.Date;
 
@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 
 
 import lombok.Data;
-import user.models.Users;
+
 
 @Data
 @Entity(name = "url")
@@ -32,4 +32,6 @@ public class Url {
     @ManyToOne
     @JoinColumn(name = "users_id")
     private Users users;
+    
+    public Integer public_flag;
 }
