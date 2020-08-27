@@ -48,9 +48,16 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         //rawDataのパスワードは渡すことができないので、暗号化
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
+       
+        
         //UserDetailsはインタフェースなのでUserクラスのコンストラクタで生成したユーザオブジェクトをキャスト
         UserDetails userDetails = (UserDetails)new User(user.getLogin_id(), encoder.encode(user.getPassword()),grantList);
 
+        
+        
         return userDetails;
+        
+        
     }
+    
 }

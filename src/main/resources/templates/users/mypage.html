@@ -4,8 +4,6 @@
 <head th:replace="layout :: head_flagment('mypage',~{::link})">
 </head>
 <body>
-    <p>ログイン成功！</p>
-     <h1>こんにちは、<span th:text="${username}"></span>さん</h1> 
-     <h1>こんにちは <span sec:authentication="principal.userId"></span>さん</h1>
+    <h1>マイページ</h1>
 </body>
 </html>

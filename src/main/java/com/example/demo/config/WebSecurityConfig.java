@@ -35,7 +35,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(
                 "/images/**",
                 "/css/**",
-                "/javascript/**"
+                "/javascript/**",
+                "/users/**",
+                "/users/create",
+                "/creater",
+                "/toppage/topindex"
                 );
     }
 
@@ -53,11 +57,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .defaultSuccessUrl("/login1", true) //認証が成功した際に遷移するURL
         .failureUrl("/login?error") //認証が失敗した際に遷移するURL
         .permitAll() //どのユーザでも接続できる。
+        
         .and()
         .logout()
         .logoutUrl("/logout")
         .logoutSuccessUrl("/login?logout")
+        
         .permitAll();
+        
     }
 
     /**
