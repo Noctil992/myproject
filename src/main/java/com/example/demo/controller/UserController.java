@@ -5,15 +5,17 @@ import java.security.Principal;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.models.Users;
 import com.example.demo.repository.CreateUserDao;
@@ -29,9 +31,30 @@ public class UserController {
 
     @GetMapping("/users/new")
     public String newUsersPage(@ModelAttribute Users users,  Model model) {
-        
-        
+
         return "users/newUser";
+
+    }
+    
+    @PostMapping("/users/create")
+    public String createUserPage(@Validated @ModelAttribute Users users,BindingResult result, Model model) {
+        if(result.hasErrors()) {
+            return "users/newUser";
+        }
+        Long before = usersrepository.count();
+        usersrepository.save(users);
+        Long after = usersrepository.count();
+        if(before == after) {
+            return "redirect:/users/createerror";
+        } else {
+            return "creater";
+        }
+    }
+
+    @GetMapping("/users/createerror")
+    public String createErrorPage(RedirectAttributes re) {
+        re.addFlashAttribute("errors", "true");
+        return "redirect:/users/new";
     }
 
     @GetMapping("/login")
@@ -50,16 +73,6 @@ public class UserController {
 
 
 
-    @PostMapping("/users/create")
-    public String createUserPage(@ModelAttribute Users users) {
-        Long before = usersrepository.count();
-        usersrepository.save(users);
-        Long after = usersrepository.count();
-        if(before == after) {
-            return "redirect:/";
-        } else {
-            return "creater";
-        }
-    }
+    
 
 }

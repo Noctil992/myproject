@@ -4,9 +4,13 @@
 <head th:replace="layout :: head_flagment('new',~{::link})">
 </head>
 <body>
+    
 	<form th:action="@{/users/create}" th:object="${users}" method="post" enctype="multipart/form-data">
 		<label for="login_id">ログインＩＤ</label>
-		<input type="text" th:field="*{login_id}"> 
+		<input type="text" th:field="*{login_id}"> <br />
+		<div th:if="${errors != null}">
+		  <p>このＩＤは既に使用されています。</p>
+		</div>
 		
 		<label for="password">パスワード</label>
 		<input type="text" th:field="*{password}"> 
@@ -24,7 +28,13 @@
 		<input type="hidden" name="_token" value="${_token}" />
 		<input type="hidden" th:field="*{delete_flag}" value="0" />
 		
-		<button type="submit">投稿</button>
+		<button type="submit">登録</button>
+		<small style="color:red" th:errors="*{name}"></small>
+		<ul>
+        <li th:each="error : ${#fields.detailedErrors()}">
+            <span th:text="${error.message}">Error message</span>
+        </li>
+    </ul>
 	</form>
 </body>
 </html>
