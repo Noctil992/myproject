@@ -7,6 +7,6 @@ import com.example.demo.models.Users;
 
 
 @Repository
-public interface UsersRepository extends JpaRepository <Users, Integer> {
+public interface UsersRepository extends JpaRepository <Users, String> {
     long count();
 }

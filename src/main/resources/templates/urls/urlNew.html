@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="layout :: head_flagment('URL登録',~{::link})">
+</head>
+<body>
+    <h1>
+        こんにちは<span th:text="${username}"></span>さんのＵＲＬ登録ページです。
+    </h1>
+    <form th:action="@{/urls/create}" th:object="${url}" method="post" enctype="multipart/form-data">
+        
+        <ul>
+	        <li th:each="error : ${#fields.detailedErrors()}">
+	            <span th:text="${error.message}">Error message</span>
+	        </li>
+        </ul><br />
+        <label for="title">タイトル</label>
+        <input type="text" th:field="*{title}"> <br />
+        
+        <label for="url">登録したいURL</label>
+        <input type="text" th:field="*{urls}"> <br />
+        
+        <label for="content">説明</label>
+        <input type="text" th:field="*{content}"> <br />
+        
+        <label for="public_flag">公開設定</label>  
+        <select name="public_flag" th:field="*{public_flag}">
+            <option value="0">非公開</option>
+            <option value="1">公開</option>
+        </select> <br />
+        
+        <input type="hidden" name="loginUserId" th:value="${username}"> <br />
+        <button type="submit">登録</button>
+        
+    </form> <br />
+</body>
+</html>

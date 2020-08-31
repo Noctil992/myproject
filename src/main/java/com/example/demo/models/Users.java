@@ -26,6 +26,7 @@ public class Users {
     
     @NotBlank
     private String name;
+    
     private Integer admin_flag;
     private Integer delete_flag;
 }

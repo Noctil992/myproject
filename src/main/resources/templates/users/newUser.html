@@ -7,26 +7,25 @@
     
 	<form th:action="@{/users/create}" th:object="${users}" method="post" enctype="multipart/form-data">
 		<label for="login_id">ログインＩＤ</label>
-		<input type="text" th:field="*{login_id}"> <br />
+		<input type="text" th:field="*{login_id}"> 
 		<div th:if="${errors != null}">
 		  <p>このＩＤは既に使用されています。</p>
 		</div>
-		
+		<br />
 		<label for="password">パスワード</label>
-		<input type="text" th:field="*{password}"> 
+		<input type="text" th:field="*{password}"> <br />
 		
 		<label for="name">表示名</label>
-		<input type="text" th:field="*{name}">
+		<input type="text" th:field="*{name}"> <br />
 		
-		<!-- a.あとでけす -->
+		<!-- あとでけす -->
 		<label for="admin_flag">権限</label>  
 		<select name="admin_flag" th:field="*{admin_flag}">
 			<option value="0">一般</option>
 			<option value="1">管理者</option>
 		</select>
 		
-		<input type="hidden" name="_token" value="${_token}" />
-		<input type="hidden" th:field="*{delete_flag}" value="0" />
+		<input type="hidden" name="delete_flag" th:value="0" />
 		
 		<button type="submit">登録</button>
 		<small style="color:red" th:errors="*{name}"></small>

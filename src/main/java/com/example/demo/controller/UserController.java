@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.security.Principal;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 
@@ -35,18 +36,21 @@ public class UserController {
         return "users/newUser";
 
     }
-    
+
     @PostMapping("/users/create")
     public String createUserPage(@Validated @ModelAttribute Users users,BindingResult result, Model model) {
+
+        Optional<Users> ucheck = usersrepository.findById(users.getLogin_id());
+
         if(result.hasErrors()) {
             return "users/newUser";
         }
-        Long before = usersrepository.count();
-        usersrepository.save(users);
-        Long after = usersrepository.count();
-        if(before == after) {
+
+        if(ucheck.isPresent()) {
             return "redirect:/users/createerror";
         } else {
+
+            usersrepository.save(users);
             return "creater";
         }
     }
@@ -73,6 +77,6 @@ public class UserController {
 
 
 
-    
+
 
 }

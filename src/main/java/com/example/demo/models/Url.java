@@ -1,14 +1,11 @@
 package com.example.demo.models;
 
-import java.util.Date;
-
+import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
@@ -20,18 +17,18 @@ public class Url {
     @GeneratedValue
     private Integer id;
     
+    @NotBlank
     private String title;
     
-    private String url;
+    @NotBlank
+    private String urls;
     
     @Lob
     private String content;
     
     private Date create_day;
     
-    @ManyToOne
-    @JoinColumn(name = "users_id")
-    private Users users;
+    private String loginUserId;
     
     public Integer public_flag;
 }

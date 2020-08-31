@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="layout :: head_flagment('mypage',~{::link})">
+</head>
+<body>
+	<h1>マイページ</h1>
+	<p>ログイン成功！</p>
+	<h1>
+		こんにちは、<span th:text="${username}"></span>さん
+	</h1>
+    <a th:href="@{'/urls/new'}" id="newurllink">作成ページ</a>
+    <h1>登録したURL</h1>
+    <table>
+        <tr th:each="url : ${urllist}" th:object="${url}">
+            <td th:text="*{title}"></td>
+            <td th:text="*{urls}"></td>
+            <td th:text="*{create_day}"></td>
+    </table>
+</body>
+</html>

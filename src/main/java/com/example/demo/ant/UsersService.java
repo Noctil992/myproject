@@ -12,6 +12,7 @@ import com.example.demo.models.Users;
 public class UsersService{
     private EntityManager entityManager;
     
+    @SuppressWarnings("unchecked")
     public List<Users> finder(String login_id) {
     List<Users> list = entityManager
             .createQuery("SELECT * from users where login_id = :login_id")

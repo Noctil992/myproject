@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/users/**",
                 "/users/create",
                 "/creater",
-                "/toppage/topindex"
+                "/"
                 );
     }
 
@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .loginProcessingUrl("/login") //フォームのSubmitURL、このURLへリクエストが送られると認証処理が実行される
         .usernameParameter("login_id") //リクエストパラメータのname属性を明示
         .passwordParameter("password")
-        .defaultSuccessUrl("/login1", true) //認証が成功した際に遷移するURL
+        .defaultSuccessUrl("/mypage", true) //認証が成功した際に遷移するURL
         .failureUrl("/login?error") //認証が失敗した際に遷移するURL
         .permitAll() //どのユーザでも接続できる。
         
