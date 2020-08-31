@@ -18,5 +18,8 @@
             <td th:text="*{urls}"></td>
             <td th:text="*{create_day}"></td>
     </table>
+    <form id="logout-form" th:action="@{/logout}" method="post">
+    <button type="submit">logout</button>
+    </form>
 </body>
 </html>

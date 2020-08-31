@@ -57,14 +57,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .defaultSuccessUrl("/mypage", true) //認証が成功した際に遷移するURL
         .failureUrl("/login?error") //認証が失敗した際に遷移するURL
         .permitAll() //どのユーザでも接続できる。
-        
+
         .and()
         .logout()
-        .logoutUrl("/logout")
-        .logoutSuccessUrl("/login?logout")
-        
         .permitAll();
-        
+
     }
 
     /**
