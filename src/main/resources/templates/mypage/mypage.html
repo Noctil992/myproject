@@ -17,9 +17,21 @@
             <td th:text="*{title}"></td>
             <td th:text="*{urls}"></td>
             <td th:text="*{create_day}"></td>
+            <td><a th:href="@{/urls/delete?(id=*{id})}"><button onClick="return deleteConfirm()">削除</button></a></td>
     </table>
     <form id="logout-form" th:action="@{/logout}" method="post">
     <button type="submit">logout</button>
     </form>
+    
+    <script type="text/javascript" th:inline="javascript">
+    function deleteConfirm() {
+    	if(window.confirm('このURLを削除しますか?')) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    	
+    }
+    </script>
 </body>
 </html>

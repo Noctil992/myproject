@@ -45,5 +45,12 @@ public class Urlcontroller {
         urlR.save(url);
         return "redirect:/mypage";
     }
+    
+    @GetMapping("urls/delete")
+    public String deleteUrl(@ModelAttribute Url url, Model model, Integer id) {
+            urlR.deleteById(id);
+            return "redirect:/mypage";
+        
+    }
 }
 
