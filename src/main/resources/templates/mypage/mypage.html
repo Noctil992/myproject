@@ -11,6 +11,7 @@
 		こんにちは、<span th:text="${username}"></span>さん
 	</h1>
     <a th:href="@{'/urls/new'}" id="newurllink">作成ページ</a>
+    
     <h1>登録したURL</h1>
     <table>
         <tr th:each="url : ${urllist}" th:object="${url}">
@@ -18,11 +19,15 @@
             <td th:text="*{urls}"></td>
             <td th:text="*{create_day}"></td>
             <td><a th:href="@{/urls/delete?(id=*{id})}"><button onClick="return deleteConfirm()">削除</button></a></td>
+            <td><a th:href="@{/test?(id=*{id})}"><button>テスト</button></a></td>
     </table>
+    
+    <!-- ログアウト処理 -->
     <form id="logout-form" th:action="@{/logout}" method="post">
     <button type="submit">logout</button>
     </form>
     
+    <!-- javascript -->
     <script type="text/javascript" th:inline="javascript">
     function deleteConfirm() {
     	if(window.confirm('このURLを削除しますか?')) {

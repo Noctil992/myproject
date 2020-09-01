@@ -13,4 +13,6 @@ import com.example.demo.models.Url;
 @Repository
 public interface UrlRepository extends JpaRepository <Url, Integer> {
     List<Url> findAllByloginUserId(String loginUserId);
+    Url findOneByid(Integer id);
+    
 }

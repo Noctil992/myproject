@@ -36,7 +36,7 @@ public class Urlcontroller {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();//get logged in username
         model.addAttribute("username", name);
-        
+
         if(result.hasErrors()) {
             return "urls/urlNew";
         }
@@ -45,12 +45,28 @@ public class Urlcontroller {
         urlR.save(url);
         return "redirect:/mypage";
     }
-    
+
     @GetMapping("urls/delete")
-    public String deleteUrl(@ModelAttribute Url url, Model model, Integer id) {
-            urlR.deleteById(id);
-            return "redirect:/mypage";
+    public String deleteUrl(@ModelAttribute Url url, Model model, Integer id, Principal principal) {
+        Url u = urlR.findOneByid(id);//URLのIDを持ってきて、対応するIDのURL情報からログインユーザーIDを取得
+        String a = u.getLoginUserId();
         
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();//現在ログインしている人の情報取得
+
+        model.addAttribute("urluser", a);
+        model.addAttribute("logginuser", name);
+        
+        if(a.equals(name)) {
+            urlR.deleteById(id);
+        } else {
+            model.addAttribute("error", "認証外ユーザーアクセスです。");
+            return "errors";
+        }
+        return "redirect:/mypage";
+
     }
+
+    
 }
 
