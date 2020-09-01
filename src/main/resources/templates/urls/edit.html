@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="layout :: head_flagment('編集画面',~{::link})">
+</head>
+<body>
+    <form th:action="@{/urls/update}" th:object="${url}" method="post">
+    <label for="title">タイトル</label>
+        <input type="text" th:field="*{title}" value="*{title}"> <br />
+        
+        <label for="url">登録したいURL</label>
+        <input type="text" th:field="*{urls}"> <br />
+        
+        <label for="content">説明</label>
+        <input type="text" th:field="*{content}"> <br />
+        
+        <label for="public_flag">公開設定</label>  
+        <select name="public_flag" th:field="*{public_flag}">
+            <option value="0">非公開</option>
+            <option value="1">公開</option>
+        </select> <br />
+        
+        <input type="hidden" name="loginUserId" th:value="${username}">
+        <input type="hidden" name="id" th:value="${url.id}">
+        <button type="submit">登録</button>
+    
+    </form>
+</body>
+</html>

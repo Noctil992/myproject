@@ -48,15 +48,15 @@ public class Urlcontroller {
 
     @GetMapping("urls/delete")
     public String deleteUrl(@ModelAttribute Url url, Model model, Integer id, Principal principal) {
-        Url u = urlR.findOneByid(id);//URLのIDを持ってきて、対応するIDのURL情報からログインユーザーIDを取得
+        Url u = urlR.findOneByid(id);//URLのIDを持ってきて、対応するIDのオブジェクトを１件取得
         String a = u.getLoginUserId();
-        
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();//現在ログインしている人の情報取得
 
         model.addAttribute("urluser", a);
         model.addAttribute("logginuser", name);
-        
+
         if(a.equals(name)) {
             urlR.deleteById(id);
         } else {
@@ -66,7 +66,38 @@ public class Urlcontroller {
         return "redirect:/mypage";
 
     }
-
     
-}
+    @GetMapping("urls/edit")
+    public String editPages(@ModelAttribute Url url, Model model, Integer id, Principal principal) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        model.addAttribute("username", name);
+        
+        Url u = urlR.findOneByid(id);
+        String a = u.getLoginUserId();
+        
+        if(a.equals(name)) {
+            model.addAttribute("url", u);
+            return "urls/edit";
+        } else {
+            model.addAttribute("error", "認証外ユーザーアクセスです。");
+            return "errors";
+        }
+        
+        
+        
+    }
+    
+    @PostMapping("urls/update")
+        public String update(@ModelAttribute Url url, Model model, Integer id, Principal principal) {
+            Date currentTime = new Date(System.currentTimeMillis());
+            url.setCreate_day(currentTime);
+            urlR.save(url);
+            return "redirect:/mypage";
+        }
+    }
+    
+
+
+
 
