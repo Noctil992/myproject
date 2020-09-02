@@ -37,9 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/css/**",
                 "/javascript/**",
                 "/users/**",
-                "/users/create",
                 "/creater",
-                "/"
+                "/",
+                "/public/**"
                 );
     }
 

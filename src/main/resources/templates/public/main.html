@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="layout :: head_flagment('公開メインページ',~{::link})">
+</head>
+<body>
+    <div th:include="mypage/mypage :: navbar"></div>
+    <div class="container">
+        <h1 class="text-center">最近登録されたURL</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>URL(別タブで開きます)</th>
+                <th>更新日</th>
+                <th>説明</th>
+            </tr>
+            </thead>
+            <tr th:each="url : ${urls}" th:object="${url}">
+                <td th:text="*{title}"></td>
+	            <td><a th:href="*{urls}" th:text="*{urls}" target="_blank"></a></td>
+	            <td th:text="*{create_day}"></td>
+	            <td th:text="*{content}"></td>
+            </tr>
+            </table>
+    </div>
+    
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

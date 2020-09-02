@@ -31,4 +31,6 @@ public class Url {
     private String loginUserId;
     
     public Integer public_flag;
+    
+    public Integer good_counter;
 }

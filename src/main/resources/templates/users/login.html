@@ -2,23 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layout :: head_flagment('login',~{::link})">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
-     <div>
+    <div th:include="toppage/topindex :: nologinnavbar"></div>
+    <div class="container">
+        <div class="wrapper">
         <!-- method="post"にすることでpostリクエストを発行することができます。th:actionでPostを処理するメソッドをURLで指定します。 -->
-        <form method="post" th:action="@{/login}">
-            <div>
-                <label>Username:</label>
+        <form method="post" th:action="@{/login}" name="Login_Form" class="form-signin">
+            <h3 class="form-signin-heading">Welcome Back! Please Sign In</h3>
+            <hr class="colorgraph"><br>
+            
+            <div class="form-group">
+                <label>ログインID</label>
                 <!-- 今回の実装では使いませんがname属性を指定してあります。後で認証の時に使います。 -->
-                <input type="text" name="login_id" />
+                <input type="text" name="login_id" class="form-control" />
             </div>
-            <div>
-                <label>Password:</label>
-                <input type="password" name="password" />
+            
+            <div class="form-group">
+                <label>パスワード</label>
+                <input type="password" name="password" class="form-control"/>
             </div>
 
-            <button type="submit">login</button>
+            <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Login</button>
         </form>
+     </div>
     </div>
 </body>
 </html>

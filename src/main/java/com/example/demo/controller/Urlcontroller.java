@@ -22,7 +22,6 @@ import com.example.demo.repository.UrlRepository;
 public class Urlcontroller {
     @Autowired
     UrlRepository urlR;
-
     @GetMapping("/urls/new")
     public String createUrl(@ModelAttribute Url url, Model model, Principal principal) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -95,6 +94,19 @@ public class Urlcontroller {
             urlR.save(url);
             return "redirect:/mypage";
         }
+    
+    @GetMapping("/good")
+    public String good(@ModelAttribute Url url, Model model, Integer id, Principal principal) {
+        Integer g = urlR.getOne(id).getGood_counter();
+        g++;
+        url.setGood_counter(g);
+        urlR.save(url);
+        return "redirect:/mypage";
+    }
+    
+    
+    
+    
     }
     
 

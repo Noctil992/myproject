@@ -4,26 +4,43 @@
 <head th:replace="layout :: head_flagment('編集画面',~{::link})">
 </head>
 <body>
+    <div th:include="mypage/mypage :: navbar"></div>
+    
+    <div class="container">
     <form th:action="@{/urls/update}" th:object="${url}" method="post">
+    <br />
+    <div class="form-group">
     <label for="title">タイトル</label>
         <input type="text" th:field="*{title}" value="*{title}"> <br />
+        </div>
         
+        <div class="form-group">
         <label for="url">登録したいURL</label>
         <input type="text" th:field="*{urls}"> <br />
+        </div>
         
+        <div class="form-group">
         <label for="content">説明</label>
         <input type="text" th:field="*{content}"> <br />
+        </div>
         
+        <div class="form-group">
         <label for="public_flag">公開設定</label>  
         <select name="public_flag" th:field="*{public_flag}">
             <option value="0">非公開</option>
             <option value="1">公開</option>
         </select> <br />
-        
+        </div>
+        <div class="form-group">
         <input type="hidden" name="loginUserId" th:value="${username}">
         <input type="hidden" name="id" th:value="${url.id}">
-        <button type="submit">登録</button>
-    
+        <input type="hidden" name="good_counter" th:value="${url.good_counter}">
+        <button type="submit">更新</button>
+        </div>
     </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,32 +1,85 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+          xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="layout :: head_flagment('mypage',~{::link})">
 </head>
 <body>
-	<h1>マイページ</h1>
-	<p>ログイン成功！</p>
+    <!-- 1.ナビゲーションバーの設定 -->
+    <div th:fragment="navbar">
+    <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/mypage">おすすめサイト共有</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/mypage">
+          <i class="fa fa-home"></i>
+          MyPageへ
+          <span class="sr-only">(current)</span>
+          </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/urls/new">
+          <i class="fa fa-envelope-o">
+            <span class="badge badge-danger">New</span>
+          </i>
+          URL新規登録
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/public/main">
+          <i class="fa fa-envelope-o">
+            <span class="badge badge-info">Go</span>
+          </i>
+          共有ページへ
+        </a>
+      </li>
+      
+    </ul>
+    
+    <form  id="logout-form" class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+    </form>
+  </div>
+</nav>
+</div>
+<div class="container">
+	<h1 class="text-center">マイページ</h1>
 	<h1>
 		こんにちは、<span th:text="${username}"></span>さん
 	</h1>
-    <a th:href="@{'/urls/new'}" id="newurllink">作成ページ</a>
     
+ 
     <h1>登録したURL</h1>
-    <table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>URL(別タブで開きます)</th>
+                <th>更新日</th>
+                <th>説明</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
         <tr th:each="url : ${urllist}" th:object="${url}">
             <td th:text="*{title}"></td>
-            <td th:text="*{urls}"></td>
+            <td><a th:href="*{urls}" th:text="*{urls}" target="_blank"></a></td>
             <td th:text="*{create_day}"></td>
-            <td><a th:href="@{/urls/delete?(id=*{id})}"><button onClick="return deleteConfirm()">削除</button></a></td>
-            <td><a th:href="@{/urls/edit?(id=*{id})}"><button>編集</button></a></td>
+            <td th:text="*{content}"></td>
+            <td><a th:href="@{/urls/edit?(id=*{id})}"><button class="btn btn-outline-success my-2 my-sm-0">編集</button></a></td>
+            <td><a th:href="@{/urls/delete?(id=*{id})}"><button onClick="return deleteConfirm()" class="btn btn-outline-danger my-2 my-sm-0">削除</button></a></td>          
     </table>
     
-    <!-- ログアウト処理 -->
-    <form id="logout-form" th:action="@{/logout}" method="post">
-    <button type="submit">logout</button>
-    </form>
     
+</div>
+
+
+
     <!-- javascript -->
     <script type="text/javascript" th:inline="javascript">
     function deleteConfirm() {
@@ -38,5 +91,9 @@
     	
     }
     </script>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
