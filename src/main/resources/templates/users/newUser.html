@@ -4,30 +4,27 @@
 <head th:replace="layout :: head_flagment('new',~{::link})">
 </head>
 <body>
-    
+<a href="/"><button class="btn btn-outline-success my-2 my-sm-0">←トップページに戻る場合はこちら</button></a>
+    <div class="wrapper fadeInDown">
+    <div class="main">
+         <div id="formContent">
 	<form th:action="@{/users/create}" th:object="${users}" method="post" enctype="multipart/form-data">
-		<label for="login_id">ログインＩＤ</label>
-		<input type="text" th:field="*{login_id}"> 
+		<label for="login_id">使用したいログインＩＤ</label>
+		<input type="text" th:field="*{login_id}" placeholder="ログインIDを入力"> 
 		<div th:if="${errors != null}">
 		  <p>このＩＤは既に使用されています。</p>
 		</div>
 		<br />
 		<label for="password">パスワード</label>
-		<input type="text" th:field="*{password}"> <br />
+		<input type="text" th:field="*{password}" placeholder="パスワードを入力"> <br />
 		
-		<label for="name">表示名</label>
-		<input type="text" th:field="*{name}"> <br />
 		
-		<!-- あとでけす -->
-		<label for="admin_flag">権限</label>  
-		<select name="admin_flag" th:field="*{admin_flag}">
-			<option value="0">一般</option>
-			<option value="1">管理者</option>
-		</select>
+		<input type="hidden" name="name" th:value="表示名なし"> <br />
+		
 		
 		<input type="hidden" name="delete_flag" th:value="0" />
 		
-		<button type="submit">登録</button>
+		<button type="submit" class="btn btn-outline-success" >登録</button>
 		<small style="color:red" th:errors="*{name}"></small>
 		<ul>
         <li th:each="error : ${#fields.detailedErrors()}">
@@ -35,5 +32,8 @@
         </li>
     </ul>
 	</form>
+	</div>
+	</div>
+	</div>
 </body>
 </html>

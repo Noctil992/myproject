@@ -97,11 +97,12 @@ public class Urlcontroller {
     
     @GetMapping("/good")
     public String good(@ModelAttribute Url url, Model model, Integer id, Principal principal) {
-        Integer g = urlR.getOne(id).getGood_counter();
+        Url u = urlR.findOneByid(id);
+        Integer g = u.getGood_counter();
         g++;
-        url.setGood_counter(g);
-        urlR.save(url);
-        return "redirect:/mypage";
+        u.setGood_counter(g);
+        urlR.save(u);
+        return "redirect:/public/main";
     }
     
     

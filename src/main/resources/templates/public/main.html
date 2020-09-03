@@ -14,6 +14,8 @@
                 <th>URL(別タブで開きます)</th>
                 <th>更新日</th>
                 <th>説明</th>
+                <th>いいね</th>
+                <th></th>
             </tr>
             </thead>
             <tr th:each="url : ${urls}" th:object="${url}">
@@ -21,6 +23,8 @@
 	            <td><a th:href="*{urls}" th:text="*{urls}" target="_blank"></a></td>
 	            <td th:text="*{create_day}"></td>
 	            <td th:text="*{content}"></td>
+	            <td th:text="*{good_counter}"></td>
+	            <td><a th:href="@{/good?(id=*{id})}"><button class="btn btn-outline-success my-2 my-sm-0">いいね</button></a></td>
             </tr>
             </table>
     </div>
