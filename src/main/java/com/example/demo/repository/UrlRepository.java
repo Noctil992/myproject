@@ -14,5 +14,8 @@ import com.example.demo.models.Url;
 public interface UrlRepository extends JpaRepository <Url, Integer> {
     List<Url> findAllByloginUserId(String loginUserId);
     Url findOneByid(Integer id);
+    List<Url> findTop5ByPublicflagOrderByIdDesc(Integer publicflag);
+    Url findTop1ByPublicflagOrderByGoodcounterDesc(Integer publicflag);
+    Url findTop1ByPublicflagOrderByIdDesc(Integer publicflag);
     
 }

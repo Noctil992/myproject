@@ -40,7 +40,7 @@ public class Urlcontroller {
             return "urls/urlNew";
         }
         Date currentTime = new Date(System.currentTimeMillis());
-        url.setCreate_day(currentTime);
+        url.setCreateday(currentTime);
         urlR.save(url);
         return "redirect:/mypage";
     }
@@ -90,7 +90,7 @@ public class Urlcontroller {
     @PostMapping("urls/update")
         public String update(@ModelAttribute Url url, Model model, Integer id, Principal principal) {
             Date currentTime = new Date(System.currentTimeMillis());
-            url.setCreate_day(currentTime);
+            url.setCreateday(currentTime);
             urlR.save(url);
             return "redirect:/mypage";
         }
@@ -98,9 +98,9 @@ public class Urlcontroller {
     @GetMapping("/good")
     public String good(@ModelAttribute Url url, Model model, Integer id, Principal principal) {
         Url u = urlR.findOneByid(id);
-        Integer g = u.getGood_counter();
+        Integer g = u.getGoodcounter();
         g++;
-        u.setGood_counter(g);
+        u.setGoodcounter(g);
         urlR.save(u);
         return "redirect:/public/main";
     }

@@ -25,8 +25,8 @@
         </div>
         
         <div class="form-group">
-        <label for="public_flag">公開設定</label>  
-        <select name="public_flag" th:field="*{public_flag}">
+        <label for="publicflag">公開設定</label>  
+        <select name="publicflag" th:field="*{publicflag}">
             <option value="0">非公開</option>
             <option value="1">公開</option>
         </select> <br />
@@ -34,7 +34,7 @@
         <div class="form-group">
         <input type="hidden" name="loginUserId" th:value="${username}">
         <input type="hidden" name="id" th:value="${url.id}">
-        <input type="hidden" name="good_counter" th:value="${url.good_counter}">
+        <input type="hidden" name="good_counter" th:value="${url.goodcounter}">
         <button type="submit">更新</button>
         </div>
     </form>

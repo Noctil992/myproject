@@ -26,11 +26,11 @@ public class Url {
     @Lob
     private String content;
     
-    private Date create_day;
+    private Date createday;
     
     private String loginUserId;
     
-    public Integer public_flag;
+    public Integer publicflag;
     
-    public Integer good_counter;
+    public Integer goodcounter;
 }

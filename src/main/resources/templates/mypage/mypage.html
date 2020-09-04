@@ -38,13 +38,15 @@
 </nav>
 </div>
 <div class="container">
-	<h1 class="text-center">マイページ</h1>
+    <div class="jumbotron">
+	  <h1 class="text-center">マイページ</h1>
+	</div>
 	<h1>
 		こんにちは、<span th:text="${username}"></span>さん
 	</h1>
-    
- 
-    <h1>登録したURL</h1>
+	
+   <div class="wrapper fadeInDown">
+    <h1 class="text-center">登録したURL</h1>
     <table class="table">
         <thead>
             <tr>
@@ -59,12 +61,12 @@
         <tr th:each="url : ${urllist}" th:object="${url}">
             <td th:text="*{title}"></td>
             <td><a th:href="*{urls}" th:text="*{urls}" target="_blank"></a></td>
-            <td th:text="*{create_day}"></td>
+            <td th:text="*{createday}"></td>
             <td th:text="*{content}"></td>
             <td><a th:href="@{/urls/edit?(id=*{id})}"><button class="btn btn-outline-success my-2 my-sm-0">編集</button></a></td>
             <td><a th:href="@{/urls/delete?(id=*{id})}"><button onClick="return deleteConfirm()" class="btn btn-outline-danger my-2 my-sm-0">削除</button></a></td>          
     </table>
-    
+    </div>
     
 </div>
 

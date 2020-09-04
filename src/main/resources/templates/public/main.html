@@ -5,9 +5,16 @@
 </head>
 <body>
     <div th:include="mypage/mypage :: navbar"></div>
-    <div class="container">
-        <h1 class="text-center">最近登録されたURL</h1>
-        <table class="table">
+    <p></p>
+    
+    
+    <div class="container col-md-10">
+    <div class="card">
+    
+             <h1 class="text-center card-header">最近登録されたURL</h1>
+             
+    <div class="card-body">
+                <table class="table">
             <thead>
             <tr>
                 <th>タイトル</th>
@@ -21,13 +28,51 @@
             <tr th:each="url : ${urls}" th:object="${url}">
                 <td th:text="*{title}"></td>
 	            <td><a th:href="*{urls}" th:text="*{urls}" target="_blank"></a></td>
-	            <td th:text="*{create_day}"></td>
+	            <td th:text="*{createday}"></td>
 	            <td th:text="*{content}"></td>
-	            <td th:text="*{good_counter}"></td>
+	            <td th:text="*{goodcounter}"></td>
 	            <td><a th:href="@{/good?(id=*{id})}"><button class="btn btn-outline-success my-2 my-sm-0">いいね</button></a></td>
             </tr>
             </table>
+            </div>
     </div>
+    </div>
+     <p></p>
+    
+    
+    
+    <div class="row mb-2">
+        <div class="col-md-4 offset-md-2">
+          <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                
+            <div class="card-body d-flex flex-column align-items-start">
+              <strong class="card-header d-inline-block mb-2 text-white bg-primary">最多いいねのついた投稿はこちら</strong>
+              <h3 class="mb-0">
+                <a class="text-dark" th:href="${murl.urls}" th:text="${murl.title}" target="_blank"></a>
+              </h3>
+               <a class="text-dark" th:href="${murl.urls}" th:text="${murl.urls}" target="_blank"></a>
+              <div class="mb-1 text-muted" th:text="${murl.createday}"></div>
+              <p class="card-text mb-auto" th:text="${murl.content}"></p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="card flex-md-row mb-4 box-shadow h-md-250">
+            <div class="card-body d-flex flex-column align-items-start">
+              <strong class="card-header d-inline-block mb-2 text-white bg-info">最新の投稿はこちら</strong>
+              <h3 class="mb-0">
+                <a class="text-dark" th:href="${nurl.urls}" th:text="${nurl.title}" target="_blank"></a>
+              </h3>
+              <a class="text-dark" th:href="${nurl.urls}" th:text="${nurl.urls}" target="_blank"></a>
+              <div class="mb-1 text-muted" th:text="${nurl.createday}"></div>
+              <p class="card-text mb-auto" th:text="${nurl.content}"></p>
+            </div>
+          </div>
+        </div>
+  </div>
+    
+    
     
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

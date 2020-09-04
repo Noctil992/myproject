@@ -18,8 +18,13 @@ public class PublicPageController {
     
     @GetMapping("public/main")
     public String publicPage(@ModelAttribute Url url, Model model) {
-        List<Url> urls = urlR.findAll();
+        Integer publicflag = 1;
+        List<Url> urls = urlR.findTop5ByPublicflagOrderByIdDesc(publicflag); //最近登録された５件
         model.addAttribute("urls", urls);
+        Url murl = urlR.findTop1ByPublicflagOrderByGoodcounterDesc(publicflag);
+        model.addAttribute("murl", murl);
+        Url nurl = urlR.findTop1ByPublicflagOrderByIdDesc(publicflag);
+        model.addAttribute("nurl", nurl);
         return "public/main";
     }
 }
