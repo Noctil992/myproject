@@ -36,18 +36,23 @@
     </form>
   </div>
 </nav>
+
 </div>
-<div class="container">
+
+
+<div class="container-fluid">
     <div class="jumbotron">
 	  <h1 class="text-center">マイページ</h1>
-	</div>
-	<h1>
-		こんにちは、<span th:text="${username}"></span>さん
-	</h1>
-	
-   <div class="wrapper fadeInDown">
+    </div>
+		<h1>
+			こんにちは、<span th:text="${username}"></span>さん
+		</h1>
+
+
+
+   <div class="card  text-white bg-dark wrapper fadeInDown">
     <h1 class="text-center">登録したURL</h1>
-    <table class="table">
+    <table class="table bg-white">
         <thead>
             <tr>
                 <th>タイトル</th>
@@ -67,8 +72,8 @@
             <td><a th:href="@{/urls/delete?(id=*{id})}"><button onClick="return deleteConfirm()" class="btn btn-outline-danger my-2 my-sm-0">削除</button></a></td>          
     </table>
     </div>
-    
 </div>
+
 
 
 
